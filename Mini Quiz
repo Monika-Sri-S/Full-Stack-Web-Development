@@ -1,0 +1,52 @@
+Quiz.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import QuizApp from "./QuizApp";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <QuizApp />
+  </React.StrictMode>
+);
+
+App.jsx
+import { useState } from "react";
+
+export default function QuizApp() {
+  const questions = [
+    { q: "2 + 2 =", a: "4" },
+    { q: "Capital of France?", a: "Paris" }
+  ];
+
+  const [index, setIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [answer, setAnswer] = useState("");
+
+  const submitAnswer = () => {
+    if (answer === questions[index].a) {
+      setScore(score + 1);
+    }
+    setAnswer("");
+    setIndex(index + 1);
+  };
+
+  return (
+    <div>
+      <h2>Quiz App</h2>
+      <h3>Score: {score}</h3>
+
+      {index < questions.length ? (
+        <>
+          <p>{questions[index].q}</p>
+          <input
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+          />
+          <button onClick={submitAnswer}>Submit</button>
+        </>
+      ) : (
+        <h3>Quiz Completed!</h3>
+      )}
+    </div>
+  );
+}
