@@ -1,0 +1,32 @@
+Poll.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import PollApp from "./PollApp";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <PollApp />
+  </React.StrictMode>
+);
+
+App.jsx
+import { useState } from "react";
+
+export default function PollApp() {
+  const [votes, setVotes] = useState({ Yes: 0, No: 0 });
+
+  const vote = (option) => {
+    setVotes({ ...votes, [option]: votes[option] + 1 });
+  };
+
+  return (
+    <div>
+      <h2>Classroom Poll</h2>
+      <button onClick={() => vote("Yes")}>Yes</button>
+      <button onClick={() => vote("No")}>No</button>
+
+      <p>Yes: {votes.Yes}</p>
+      <p>No: {votes.No}</p>
+    </div>
+  );
+}
