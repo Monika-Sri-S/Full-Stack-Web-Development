@@ -1,34 +1,113 @@
-Attendance.jsx
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
 App.jsx
 import { useState } from "react";
+import "./App.css";
 
-export default function App() {
-  const students = ["Alice", "Bob", "Charlie"];
-  const [attendance, setAttendance] = useState({});
+function App() {
+  const [students, setStudents] = useState([
+    { id: 1, name: "Alice", present: false },
+    { id: 2, name: "Bob", present: false },
+    { id: 3, name: "Charlie", present: false },
+    { id: 4, name: "Daisy", present: false },
+  ]);
 
-  const toggle = (name) => {
-    setAttendance({ ...attendance, [name]: !attendance[name] });
+  const toggleAttendance = (id) => {
+    setStudents(
+      students.map((student) =>
+        student.id === id
+          ? { ...student, present: !student.present }
+          : student
+      )
+    );
   };
 
   return (
-    <div>
-      <h2>Attendance Tracker</h2>
-      {students.map((s) => (
-        <p key={s}>
-          {s} - {attendance[s] ? "Present" : "Absent"}
-          <button onClick={() => toggle(s)}>Toggle</button>
-        </p>
-      ))}
+    <div className="container">
+      <h1>Attendance Tracker</h1>
+
+      <ul className="student-list">
+        {students.map((student) => (
+          <li key={student.id} className="student-item">
+            <span className="student-name">{student.name}</span>
+
+            <span
+              className={`status ${
+                student.present ? "present" : "absent"
+              }`}
+            >
+              {student.present ? "Present" : "Absent"}
+            </span>
+
+            <button onClick={() => toggleAttendance(student.id)}>
+              Toggle
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
+}
+
+export default App;
+
+App.css
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f8;
+}
+
+.container {
+  max-width: 500px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.student-list {
+  list-style: none;
+  padding: 0;
+}
+
+.student-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.student-name {
+  font-weight: 500;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.present {
+  color: green;
+}
+
+.absent {
+  color: red;
+}
+
+button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
