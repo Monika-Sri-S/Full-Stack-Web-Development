@@ -1,1 +1,86 @@
+App.css
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #eef2f7;
+}
+
+.container {
+  max-width: 400px;
+  margin: 80px auto;
+  background: #ffffff;
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+App.jsx
+import "./App.css";
+
+function App() {
+  const bookTicket = () => {
+    // Prompt: get passenger name
+    const name = prompt("Enter Passenger Name:");
+
+    if (!name) {
+      alert("Booking cancelled. Name is required.");
+      return;
+    }
+
+    // Prompt: get destination
+    const destination = prompt("Enter Destination:");
+
+    if (!destination) {
+      alert("Booking cancelled. Destination is required.");
+      return;
+    }
+
+    // Confirm booking
+    const confirmBooking = confirm(
+      `Confirm Booking?\nPassenger: ${name}\nDestination: ${destination}`
+    );
+
+    if (confirmBooking) {
+      alert(
+        `✅ Ticket Booked Successfully!\nPassenger: ${name}\nDestination: ${destination}`
+      );
+    } else {
+      alert("❌ Booking Cancelled.");
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>Flight Ticket Booking</h1>
+      <p>Click the button below to book your flight ticket.</p>
+      <button onClick={bookTicket}>Book Ticket</button>
+    </div>
+  );
+}
+
+export default App;
 
