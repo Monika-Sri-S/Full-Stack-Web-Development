@@ -1,1 +1,94 @@
+App.css
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 400px;
+}
+
+h1 {
+  color: #1e90ff;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1c86ee;
+}
+
+p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #555;
+}
+
+App.jsx
+import React from "react";
+import "./app.css";
+
+function App() {
+  const registerEvent = () => {
+    alert("Welcome to the Event Registration Portal!");
+
+    const name = prompt("Enter your full name:");
+    if (!name) {
+      alert("Registration canceled. Name is required.");
+      return;
+    }
+
+    const email = prompt("Enter your email address:");
+    if (!email) {
+      alert("Registration canceled. Email is required.");
+      return;
+    }
+
+    const eventName = prompt("Enter the event name you want to register for:");
+    if (!eventName) {
+      alert("Registration canceled. Event name is required.");
+      return;
+    }
+
+    const confirmRegistration = window.confirm(
+      `Please confirm your registration:\n\nName: ${name}\nEmail: ${email}\nEvent: ${eventName}`
+    );
+
+    if (confirmRegistration) {
+      alert(`Thank you ${name}! You are successfully registered for "${eventName}".`);
+    } else {
+      alert("Registration canceled.");
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>Event Registration</h1>
+      <button onClick={registerEvent}>Register Now</button>
+    </div>
+  );
+}
+
+export default App;
 
