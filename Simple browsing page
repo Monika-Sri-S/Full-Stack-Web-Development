@@ -1,0 +1,147 @@
+App.css
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+nav button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+nav button:hover {
+  background-color: #0056b3;
+}
+
+nav button.active {
+  background-color: #0056b3;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product-card {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.product-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .products {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+App.jsx
+import React, { useState } from "react";
+import "./app.css";
+
+function App() {
+  const categories = ["All", "Electronics", "Clothing", "Books"];
+
+  const allProducts = [
+    { id: 1, name: "Smartphone", category: "Electronics", price: 499, img: "https://via.placeholder.com/200x150" },
+    { id: 2, name: "Laptop", category: "Electronics", price: 899, img: "https://via.placeholder.com/200x150" },
+    { id: 3, name: "T-Shirt", category: "Clothing", price: 29, img: "https://via.placeholder.com/200x150" },
+    { id: 4, name: "Jeans", category: "Clothing", price: 49, img: "https://via.placeholder.com/200x150" },
+    { id: 5, name: "JavaScript Book", category: "Books", price: 19, img: "https://via.placeholder.com/200x150" },
+    { id: 6, name: "Novel", category: "Books", price: 15, img: "https://via.placeholder.com/200x150" },
+  ];
+
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredProducts =
+    selectedCategory === "All"
+      ? allProducts
+      : allProducts.filter((product) => product.category === selectedCategory);
+
+  return (
+    <div className="container">
+      <h1>Product Browsing Page</h1>
+
+      <nav>
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            className={selectedCategory === cat ? "active" : ""}
+            onClick={() => setSelectedCategory(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </nav>
+
+      <div className="products">
+        {filteredProducts.length === 0 && <p>No products available in this category.</p>}
+        {filteredProducts.map((product) => (
+          <div key={product.id} className="product-card">
+            <img src={product.img} alt={product.name} />
+            <h3>{product.name}</h3>
+            <p>Price: ${product.price}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;
