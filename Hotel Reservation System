@@ -1,1 +1,94 @@
+App.css
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 400px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #555;
+}
+
+App.jsx
+import React from "react";
+import "./app.css";
+
+function App() {
+  const bookHotel = () => {
+    alert("Welcome to the Hotel Reservation System!");
+
+    const name = prompt("Enter your full name:");
+    if (!name) {
+      alert("Reservation canceled. Name is required.");
+      return;
+    }
+
+    const rooms = prompt("How many rooms would you like to book?");
+    if (!rooms || isNaN(rooms) || rooms <= 0) {
+      alert("Invalid number of rooms. Reservation canceled.");
+      return;
+    }
+
+    const nights = prompt("How many nights will you stay?");
+    if (!nights || isNaN(nights) || nights <= 0) {
+      alert("Invalid number of nights. Reservation canceled.");
+      return;
+    }
+
+    const confirmBooking = window.confirm(
+      `Please confirm your booking:\nName: ${name}\nRooms: ${rooms}\nNights: ${nights}`
+    );
+
+    if (confirmBooking) {
+      alert(`Thank you ${name}! Your booking for ${rooms} room(s) for ${nights} night(s) is confirmed.`);
+    } else {
+      alert("Booking canceled.");
+    }
+  };
+
+  return (
+    <div className="container">
+      <h1>Hotel Reservation System</h1>
+      <button onClick={bookHotel}>Book Now</button>
+    </div>
+  );
+}
+
+export default App;
 
